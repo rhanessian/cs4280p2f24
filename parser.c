@@ -436,12 +436,13 @@ struct node* R() {
 		strcpy(tokenClass, tokenNames[scannertoken.tokenID]);
 		fprintf(stderr, "ERROR: identifier or integer expected but received '%s' of class '%s'\n", scannertoken.tkInstance, tokenClass);
 		exit(1);
-	} else
+	} else {
 		p->tkArray[0] = scannertoken;
 		scannertoken = scanner();
 		strcpy(tokenClass, tokenNames[scannertoken.tokenID]);
 		printf("{%s, %s, %d}\n", tokenClass, scannertoken.tkInstance, scannertoken.lineNum);
 		return p;
+	}
 }
 
 struct node* getNode(char* label) {
