@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall
-OBJFILES = scanner.o main.o parser.o 
+OBJFILES = scanner.o main.o parser.o testTree.o
 TARGET = parser
 
 all: $(TARGET)

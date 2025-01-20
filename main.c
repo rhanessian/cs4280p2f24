@@ -3,6 +3,8 @@
 //P2
 
 #include "parser.h"
+#include "token.h"
+#include "testTree.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -62,7 +64,8 @@ int main (int argc, const char *argv[]){
     }
     
     rewind(input);
-    parser();
+    struct node* parseTree = parser();
+    printPreorder(parseTree, 0);
     
     fclose(input);
 	

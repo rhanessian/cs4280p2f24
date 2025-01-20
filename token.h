@@ -26,4 +26,11 @@ struct token {
 
 extern char tokenClass[19];
 
-
+struct node {
+    char lab[15];  
+    struct token tkArray[15];
+    struct node* child1;
+    struct node* child2;
+    struct node* child3;
+    struct node* child4;
+};
