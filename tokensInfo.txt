@@ -1,0 +1,34 @@
+enum tokenIDs {
+    IDENT_tk,
+    INT_tk,
+    OPDEL_tk,
+    KW_tk,
+    EOF_tk
+};
+
+struct token {
+    enum tokenIDs tokenID;
+    char tkInstance[15];
+    int lineNum;
+};
+
+char* tokenNames[] = {"Identifier", "Integer", "Operator/Delimiter", "Keyword", "End of File"};
+char tokenClass[19];
+strcpy(tokenClass, tokenNames[tok.tokenID]);
+
+printf("{%s, %s, %d}\n", tokenClass, tok.tkInstance, tok.lineNum);
+
+
+
+we use the instance unless eof token
+
+the scanner function:
+-tk.tokenID is an enum of tokenIDs type that is given a tokenIDs value in the scanner source
+ex: IDENT_tk etc.
+-tk.tkInstance is a string with the specific instance of the token. scanner gives this except for the eof which needed to be added in the tester
+ex: 'hello', '123', 'start', EOF
+-tk.lineNum is the int line number upon which the token is found, this is given by the scanner
+ex: 2 etc.
+
+thus for anything other than the EOF, we will access the scannertoken.tkInstance
+for eof we will the enum scannertoken.tokenID

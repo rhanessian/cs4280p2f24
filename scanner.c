@@ -6,10 +6,15 @@
 #include <string.h>
 
 int lineNumber = 1;
-char instance[9] = "";
+char instance[15] = "";
 int c = 0;
 int value = 0;
 int newLineNum = 1;
+int statStringNum = 100;
+int relationalNum = 100;
+
+char* relationalStrings[] = {".le.", ".ge.", ".lt.", ".gt.", "**", "~"};
+char* statStrings[] = {"read", "print", "start", "iff", "iterate", "set"};
 
 int fsaMatrix[11][26] = 
  		{{1,1,1,1,1,2,1003,3,1003,1003,1003,1003,1003,10,1003,1003,1003,1003,1003,1003,1003,1003,1003,-4,0,-1},
@@ -179,6 +184,7 @@ struct token scanner() {
 		perror("ERROR: File did not open.\n");
 		exit(1);
 	}
+	instance[0] = '\0';
 	
 	int c1 = 0;
 	int c2 = 0;
@@ -215,6 +221,13 @@ struct token scanner() {
 			tk.tokenID = tkClass;
 			strcpy(tk.tkInstance, instance);
 			tk.lineNum = lineNumber;
+			int k;
+			for(k = 0; k < 6; k++) {
+    			if(strcmp(relationalStrings[k], instance) == 0) {
+    				relationalNum = k;
+    				break;
+    			}
+    		}
 			return tk;
 		case 0 ... 10:
 			row = value;
@@ -313,13 +326,29 @@ struct token scanner() {
 		ungetc(c, input);
 	} 
 	
-	int i;
-	for(i = 0; i < 12; i++ ) {
+	int i, j, k;
+	for(i = 0; i < 12; i++) {
     	if(strcmp(keywords[i], instance) == 0) {
             value = 1004;
             tkClass = KW_tk;
             break;
         }
+    }
+    
+    if (tkClass == KW_tk) {
+    	for(j = 0; j < 6; j++) {
+    		if(strcmp(statStrings[j], instance) == 0) {
+            	statStringNum = j;
+            	break;
+            }
+    	}
+    }
+    
+    for(k = 0; k < 6; k++) {
+    	if(strcmp(relationalStrings[k], instance) == 0) {
+    		relationalNum = k;
+    		break;
+    	}
     }
 	
 	if (col == 99) {

@@ -6,7 +6,9 @@ extern int lineNumber;
 extern char* keywords[];
 extern int fsaMatrix[11][26];
 extern FILE *input;
-extern char instance[9];
+extern char instance[15];
+extern int statStringNum;
+extern int relationalNum;
 
 enum tokenIDs {
     IDENT_tk,
@@ -18,6 +20,10 @@ enum tokenIDs {
 
 struct token {
     enum tokenIDs tokenID;
-    char tkInstance[9];
+    char tkInstance[15];
     int lineNum;
 };
+
+extern char tokenClass[19];
+
+

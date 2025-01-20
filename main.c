@@ -1,8 +1,8 @@
 //Rebecca Hanessian
 //CS 4280
-//P1
+//P2
 
-#include "testScanner.h"
+#include "parser.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -62,7 +62,7 @@ int main (int argc, const char *argv[]){
     }
     
     rewind(input);
-    testScanner();
+    parser();
     
     fclose(input);
 	

@@ -6,11 +6,41 @@
 <stat>       ::= <read> | <print> | <block> | <cond> | <iter> | <assign>
 <block>      ::= start <vars> <stats> stop
 <read>       ::= read identifier;
-<print>      ::= print <exp>;
-<cond>       ::= iff [ <exp> <relational> <exp> ] <stat>
-<assign>     ::= set identifier <exp>;
+<print>      ::= print <expr>;
+<cond>       ::= iff [ <expr> <relational> <expr> ] <stat>
+<iter>       ::= iterate [ <exp> <relational> <expr> ] <stat>
+<assign>     ::= set identifier <expr>;
 <relational> ::= .le. | .ge. | .lt. | .gt. | ** | ~
-<exp>        ::= <M> + <exp> | <M> - <exp> | <M>
+<expr>       ::= <M> + <expr> | <M> - <expr> | <M>
 <M>          ::= <N> % <M> | <N>
 <N>          ::= <R> / <N> | -<N> | <R>
-<R>          ::= (<exp>) | identifier | integer
+<R>          ::= (<expr>) | identifier | integer
+
+
+FIRST SETS:
+
+FIRST(<program>)    = {program}
+FIRST(<vars>)       = {empty, var}
+FIRST(<varList>) 	= {identifier}
+FIRST(<stats>) 		= FIRST(<stat>) = FIRST(<read>) U FIRST(<print>) U FIRST (<block>) U FIRST(<cond>) U FIRST(<iter>) U FIRST(<assign>) 
+					= {read, print, start, iff, iterate, set}
+FIRST(<mStat>)		= {empty} U FIRST(<stat>) 
+					= {empty, read, print, start, iff, iterate, set}
+FIRST(<stat>)       = {read print, start, iff, iterate, set}
+FIRST(<block>)      = {start}
+FIRST(<read>)       = {read}
+FIRST(<print>)      = {print}
+FIRST(<cond>)       = {iff}
+FIRST(<iter>)       = {iterate}
+FIRST(<assign>)     = {set}
+FIRST(<relational>) = {.le., .ge., .lt., .gt., **, ~}
+FIRST(<expr>)       = FIRST(<M>)
+					= FIRST(<N>)
+					= FIRST(<R>) U {-}
+					= {(, identifier, integer, -}
+FIRST(<M>)          = FIRST(<N>)
+					= FIRST(<R>) U {-}
+					= {(, identifier, integer, -}
+FIRST(<N>)			= FIRST(<R>) U {-}
+					= {(, identifier, integer, -}
+FIRST(<R>)			= {(, identifier, integer}
